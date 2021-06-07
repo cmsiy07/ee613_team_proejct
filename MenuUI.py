@@ -8,7 +8,8 @@ import grpc_code.client_grpc as gp
 from .TimerMessage import *
 
 
-import speech_recognition as sr
+#import speech_recognition as sr
+import SpeechRecognition as SR
 
 meui = uic.loadUiType("ui/Menu_UI.ui")[0]
 
@@ -23,7 +24,7 @@ class Menu_UI(QMainWindow, meui):
         self.Order_Btn.clicked.connect(lambda: self.order(stub))
         self.Voice_Btn.clicked.connect(lambda: self.voice())
         self.actionLogOut.triggered.connect(lambda: self.logout(w))
-        self.SR = sr.Recognizer()
+        #self.SR = SR.Recog()
     
     def logout(self,  w):
         dc.login_info['id'] = ''
@@ -61,9 +62,9 @@ class Menu_UI(QMainWindow, meui):
         # dc.menu_info[0][2] = 4
         # mic functions
 
-        text = self.SR.read_from_microphone()
+        text = SR.Recog.read_from_microphone()
         
-        words = self.SR.voice_str_parser(text)
+        words = SR.Recog.voice_str_parser(text)
         
         me_msg = "Your order:  " + " ".join(words)
         messagebox = TimerMessageBox(5, self, me_msg)

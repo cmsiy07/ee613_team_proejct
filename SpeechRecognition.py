@@ -1,7 +1,7 @@
 import speech_recognition as sr
 from nltk.tokenize import word_tokenize
 
-class Recognizer():
+class Recog():
     def __init__(self):
         # recognizer
         self.r = sr.Recognizer()
