@@ -8,7 +8,11 @@ class Members():
     def __init__(self):
         # member를 dict 형태로 저장. 'id' : ['pwd', point] 
         self.members = {}
+        self.loginid = []
     
+    def has_login(self,id_):
+        return(id_ in self.loginid)
+
     def has_id(self, id_):
         return (id_ in self.members)
     
@@ -20,7 +24,9 @@ class Members():
         return self.members[id_][1]
     
     def login_(self, id_, pwd_):
-        if self.members[id_][0] == pwd_:
+        if self.members[id_][0] == pwd_ and not self.has_login(id_):
+            self.loginid.append(id_)
+            print(self.loginid)
             return True
         else:
             return False

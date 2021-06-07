@@ -10,6 +10,7 @@ from .TimerMessage import *
 
 import speech_recognition as sr
 from nltk.tokenize import word_tokenize
+import SpeechRecognition as SR
 
 meui = uic.loadUiType("ui/Menu_UI.ui")[0]
 
@@ -24,7 +25,7 @@ class Menu_UI(QMainWindow, meui):
         self.Order_Btn.clicked.connect(lambda: self.order(stub))
         self.Voice_Btn.clicked.connect(lambda: self.voice())
         self.actionLogOut.triggered.connect(lambda: self.logout(w))
-        self.SR = sr.Recognizer()
+        self.SR = SR.Recognizer()
     
     def logout(self,  w):
         dc.login_info['id'] = ''
@@ -63,7 +64,7 @@ class Menu_UI(QMainWindow, meui):
         # mic functions
         text = self.SR.read_from_microphone()
         
-        words = self.sr.voice_str_parser(text)
+        words = self.SR.voice_str_parser(text)
         me_msg = "Your order:  " + " ".join(words)
         messagebox = TimerMessageBox(5, self, me_msg)
         messagebox.exec_()
